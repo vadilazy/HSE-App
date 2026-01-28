@@ -1,0 +1,8 @@
+{
+  "name": "SmartForm Mobile",
+  "description": "A smart mobile-first form builder and data collection tool that exports seamlessly to Excel/CSV.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}

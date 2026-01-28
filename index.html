@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="manifest.json">
+    <title>HSE Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      ::-webkit-scrollbar { display: none; }
+      body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        overscroll-behavior-y: contain;
+        background-color: #0f172a; /* Match header for notch area */
+      }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+      #root { background-color: #f8fafc; min-height: 100vh; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+    <div id="root"></div>
+    <script>
+      // Enhanced Service Worker registration to handle sandboxed IDE environments
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          try {
+            // Resolve the sw.js URL relative to the current location
+            const swUrl = new URL('sw.js', window.location.href);
+            
+            // Only attempt registration if the script and page share the same origin
+            // to avoid the SecurityError you encountered.
+            if (swUrl.origin === window.location.origin) {
+              navigator.serviceWorker.register(swUrl.pathname)
+                .then(reg => console.log('Service Worker registered successfully'))
+                .catch(err => console.debug('Service Worker ignored in this environment:', err.message));
+            } else {
+              console.debug('Service Worker origin mismatch skipped for preview compatibility');
+            }
+          } catch (e) {
+            console.debug('Service Worker setup skipped');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+
+{
+  "appId": "com.hsemobile.app",
+  "appName": "HSE Mobile",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
